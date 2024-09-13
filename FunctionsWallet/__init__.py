@@ -27,7 +27,7 @@ def Extrato():
         extrato = f"{money[0]:.2f}"
         date = f"{money[1][:5]} - {money[1][6:]}"
         if money[0] < 0:
-            saque = cores(f'R$ {extrato:<10} {date}', 'vermelho', False)
+            saque = cores(f'R$ {extrato:<10} [{date}]', 'vermelho', False)
             print(f"{cont}° Saque: {saque}")
             cont += 1
         else:
@@ -43,7 +43,7 @@ def Deposito():
     db.execute(f"UPDATE TotalMoney SET totalMoney = {deposito} Where id = 1")
     db.execute(f"INSERT INTO Money (extrato, data) VALUES ({valor}, datetime('now','-3 hours')) ")
     conexao.commit()
-    print(f"Depósito realizado")
+    cores(f"Depósito realizado", 'verde')
 
 
 # Função que retira valor da conta
@@ -54,9 +54,9 @@ def Saque():
         db.execute(f"UPDATE TotalMoney SET totalMoney = {saque} Where id = 1")
         db.execute(f"INSERT INTO Money (extrato, data) VALUES (-{valor}, datetime('now','-3 hours')) ")
         conexao.commit()
-        print(f"Saque realizado")
+        cores(f"Saque realizado", 'verde')
     else:
-        print("Saldo insuficiente")
+        cores("Saldo insuficiente", 'vermelho')
 
 
 # Função que caso não exista o ID 1, ela cria um com o valor totalMoney R$ 0.00
