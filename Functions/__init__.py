@@ -32,9 +32,14 @@ def validacao(info, type):
         case 'float':
             while True:
                 try:
-                    msg = float(input(info))
+                    user = input(info)
+
+                    user = user.replace(',', '.')
+
+                    msg = float(user)
+
                 except (ValueError, TypeError):
-                    print("Inválido")
+                    print("Inválido |")
                 except KeyboardInterrupt:
                     print("Nada foi digitado.")
                 else:
