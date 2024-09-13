@@ -1,10 +1,13 @@
 # Funções de Menu do Projeto
 
-# Função para formatar os menus
-def tab(text, options):  # Função para subtítulo
+def title(text):
     cores('-' * 42, 'bold')
     cores(f"{text}".center(42), 'bold')
     cores('-' * 42, 'bold')
+
+# Função para formatar os menus
+def tab(text, options):  # Função para subtítulo
+    title(text)
     contador = 1
     print()
     for option in options:
@@ -24,9 +27,9 @@ def validacao(info, type):
                 try:
                     msg = int(input(info))
                 except (ValueError, TypeError):
-                    print("Inválido")
+                    cores("\nInválido\n", 'vermelho')
                 except KeyboardInterrupt:
-                    print("Nada foi digitado.")
+                    cores("\nNada foi digitado.\n", 'vermelho')
                 else:
                     return msg
         case 'float':
@@ -39,9 +42,9 @@ def validacao(info, type):
                     msg = float(user)
 
                 except (ValueError, TypeError):
-                    print("Inválido |")
+                    cores("\nInválido\n", 'vermelho')
                 except KeyboardInterrupt:
-                    print("Nada foi digitado.")
+                    cores("\nNada foi digitado.\n", 'vermelho')
                 else:
                     return msg
 
@@ -50,11 +53,11 @@ def validacao(info, type):
                 try:
                     msg = str(input(info)).strip()
                     if not msg:
-                        raise ValueError("Campo vazio não é permitido.")
+                        raise ValueError(cores("Campo vazio não é permitido.", 'vermelho', False))
                 except (ValueError, TypeError):
-                    print("Inválido")
+                    cores("\nInválido\n", 'vermelho')
                 except KeyboardInterrupt:
-                    print("Nada foi digitado.")
+                    cores("\nNada foi digitado.\n", 'vermelho')
                 else:
                     return msg
 
