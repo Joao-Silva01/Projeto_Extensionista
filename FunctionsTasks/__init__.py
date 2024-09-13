@@ -225,6 +225,7 @@ def RemoveTarefas():
         cores("\nA lista contém nenhuma tarefa!!\n", 'vermelho')
 
     else:
+         ListAllTasks(False)
         while True:
             id = validacao("ID da tarefa: ", 'int')
 
