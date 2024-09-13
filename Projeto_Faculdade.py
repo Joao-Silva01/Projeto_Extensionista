@@ -1,91 +1,103 @@
-from Fun_Compras import *
-from Fun_Tarefas import *
-from Fun_Carteira import *
-from time import sleep
+from FunctionsTasks import *
+from FunctionsBuys import *
+from FunctionsWallet import *
 
 while True:
-    menu(["Lista de Tarefas", "Lista de Compra", "Carteira", "Fechar o Sistema"])
-    sleep(0.5)
-    op = input("Digite a opção desejada: ").strip()
-    match op:
-        case "1":
-            adt = "Arquivo_De_Tarefas"
-            title("Lista de Tarefas")
-            ler_arquivo_tarefas(adt)
-            while True:
-                tab(["Adicionar Tarefa", "Remover Tarefa", "Remover Todas as tarefas","Retornar ao Menu"])
-                opc_tarefa = input(">> ").strip()
-                match opc_tarefa:
-                    case "1":
-                        adicionar_tarefa(adt)
-                    case "2":
-                        rem_tarefas(adt)
-                    case "3":
-                        print("Removendo todos os elementos...")
-                        rem_toda_tarefa(adt)
-                        sleep(2)
-                        print("elementos removidos com sucesso!")
-                    case "4":
-                        print("Retornando ao Menu")
-                        break
-                    case _:
-                        print("Opção Inválida")
-                        sleep(1)
-                        print("Digite a opção corretamente!")
-                        sleep(0.5)
-        case "2":
-            adc = "Arquivo_De_Compras"
-            title("Lista de Compras")
-            ler_arquivo_compras(adc)
-            while True:
-                tab(["Adicionar Compra", "Remover Compra", "Remover Todas as Compras", "Retornar ao Menu"])
-                opc_tarefa = input(">> ").strip()
-                match opc_tarefa:
-                    case "1":
-                        adicionar_compra(adc)
+    tab("Menu do Projeto", ["Tarefas", "Compras", "Carteira", "Desligar o Sistema"])
+    option = validacao(">> ", 'int')
 
-                    case "2":
-                        rem_compras(adc)
-
-                    case "3":
-                        print("Removendo todos os elementos...")
-                        rem_toda_compra(adc)
-                        sleep(2)
-                        print("elementos removidos com sucesso!")
-                    case "4":
-                        print("Retornando ao Menu")
-                        break
-                    case _:
-                        print("Opção Inválida")
-                        sleep(1)
-                        print("Digite a opção corretamente!")
-                        sleep(0.5)
-        case "3":
-            ac = "Arquivo_Carteira"
-            title("Carteira")
+    match option:
+        case 1:
             while True:
-                tab(["Depositar na Carteira", "Retirar valor da Carteira","Retornar ao Menu"])
-                opc_carteira = input(">> ").strip()
+                tab('Menu Tarefas',
+                    ["Listar as tarefas", "Adicionar Tarefa", "Editar Tarefa", "Histórico", "Remover Tarefa",
+                     "Retornar ao Menu"])
+                optionTask = validacao(">> ", 'int')
+
+                match optionTask:
+                    case 1:
+                        ListAllTasks()
+
+                    case 2:
+                        addTarefa()
+
+                    case 3:
+                        updateTarefa()
+
+                    case 4:
+                        HistoricTasks()
+
+                    case 5:
+                        RemoveTarefas()
+
+                    case 6:
+                        cores("\nRetornando ao Menu\n", 'verde')
+                        break
+
+                    case _:
+                        cores("\nOpção Inválida!\n", 'vermelho')
+
+        case 2:
+            while True:
+                tab('Menu Compras',
+                    ["Listar Produtos", "Adicionar Produto", "Editar Produto", "Remover Produto", "Histórico",
+                     "Retornar ao Menu"])
+                opc_tarefa = validacao(">> ", 'int')
+
+                match opc_tarefa:
+                    case 1:
+                        ListProducts()
+                    case 2:
+                        addProduct()
+
+                    case 3:
+                        productUpdate()
+
+                    case 4:
+                        RemoveProducts()
+
+                    case 5:
+                        HistoricProducts()
+
+                    case 6:
+                        cores("\nRetornando ao Menu\n", 'verde')
+                        break
+
+                    case _:
+                        cores("\nOpção Inválida\n", 'vermelho')
+
+        case 3:
+            while True:
+                tab('Carteira',
+                    ["Saldo da conta", "Depósito", "Saque", "Extrato",
+                     "Retornar ao Menu"])
+                opc_carteira = validacao(">> ", 'int')
+
                 match opc_carteira:
-                    case "1":
-                        adicionar_carteira(ac)
-
-                    case "2":
+                    case 1:
                         print()
-                    case "3":
-                        print("Retornando ao Menu")
+                        TotalCarteira(False)
+                        print()
+
+                    case 2:
+                        Deposito()
+
+                    case 3:
+                        Saque()
+
+                    case 4:
+                        Extrato()
+
+                    case 5:
+                        cores("\nRetornando ao Menu\n", 'verde')
                         break
+
                     case _:
-                        print("Opção Inválida")
-                        sleep(1)
-                        print("Digite a opção corretamente!")
-                        sleep(0.5)
-        case "4":
-            print("Fechando o sistema...")
-            sleep(1)
+                        cores("\nOpção Inválida\n", 'vermelho')
+
+        case 4:
+            print("\nFechando o sistema...\n")
             break
+
         case _:
-            print("Opção Inválida")
-            sleep(1)
-            print("Digite a opção corretamente!")
-            sleep(0.5)
+            cores("\nOpção Inválida, digite a opção corretamente!!\n", 'vermelho')
